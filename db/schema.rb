@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_25_064325) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_26_122743) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,9 +42,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_064325) do
   create_table "documents", force: :cascade do |t|
     t.string "name"
     t.string "doc_type"
-    t.integer "employee_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "employee_id", 
+    t.datetime "created_at", 
+    t.datetime "updated_at", 
     t.index ["employee_id"], name: "index_documents_on_employee_id"
   end
 
@@ -63,6 +63,29 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_064325) do
     t.text "bio"
     t.integer "user_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+  create_table "issued_items", force: :cascade do |t|
+    t.integer "item_id", 
+    t.integer "employee_id", 
+    t.integer "issued_by"
+    t.datetime "issued_at"
+    t.datetime "returned_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.date "issued_date"
+    t.date "return_date"
+    t.index ["employee_id"], name: "index_issued_items_on_employee_id"
+    t.index ["item_id"], name: "index_issued_items_on_item_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -90,4 +113,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_064325) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "documents", "employees"
+  add_foreign_key "issued_items", "employees"
+  add_foreign_key "issued_items", "items"
+  add_foreign_key "issued_items, :users, column: :issued_by"
+
 end

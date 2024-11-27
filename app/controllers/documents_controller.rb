@@ -23,7 +23,7 @@ class DocumentsController < ApplicationController
   def index
     if current_user.admin? || current_user.hr?
       @documents = Document.all
-    elsif current_user.employee?
+    elsif current_user.employee? && current_user.employee.present?
       begin
         @documents = current_user.employee.documents
       rescue NoMethodError

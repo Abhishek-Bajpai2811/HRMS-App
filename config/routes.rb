@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get "issued_items/index"
+  get "issued_items/show"
+  get "issued_items/new"
+  get "issued_items/create"
+  get "issued_items/edit"
+  get "issued_items/update"
+  get "issued_items/destroy"
+  get "items/index"
+  get "items/show"
+  get "items/new"
+  get "items/create"
+  get "items/edit"
+  get "items/update"
+  get "items/destroy"
   # Configure Devise routes with custom controllers
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -37,6 +51,13 @@ Rails.application.routes.draw do
   # Standard RESTful resources
   resources :documents
   resources :users, only: [:index, :show]
+
+  resources :items
+  resources :issued_items
+
+
+ 
+
 
   # Public pages routes
   get 'about', to: 'pages#about_us'

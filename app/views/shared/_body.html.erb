@@ -19,10 +19,17 @@ integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIe
     <!-- Custom CSS -->
     <style>
       .banner {
+        border: 2px solid black;
         background: linear-gradient(to right, #007bff, #00bfff);
         color: white;
-        padding: 60px 0;
+        padding: 40px 0;
         text-align: center;
+        transition: transform 0.3s;
+      }
+      .banner:hover {
+        transform: scale(1.05);
+        background: grey;
+       
       }
       .feature-box {
         border: 1px solid #007bff;
@@ -52,39 +59,40 @@ integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIe
 
       <!-- Features Section -->
       <div class="row mt-5">
-        <div class="col-md-4 mb-4">
-          <div class="feature-box text-center">
-            <h4>Manage Employees</h4>
-            <p>Easily add, edit, and view employee details.</p>
-            <a href="/employees" class="btn btn-primary">Go to Employees</a>
+        <div class="col-md-4 mb-4 ">
+          <div class="feature-box text-center bg-dark">
+            <h4 class="text-light">Manage Employees</h4>
+            <p class="text-light">Easily add, edit, and view employee details.</p>
+            <a href="/employees" class="btn btn-primary btn-outline-light">Go to Employees</a>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <div class="feature-box text-center">
-            <h4>Manage Documents</h4>
-            <p>Securely upload and access employee documents.</p>
-            <a href="/documents" class="btn btn-primary">Go to Documents</a>
+          <div class="feature-box text-center  bg-dark">
+            <h4 class="text-light">Manage Documents</h4>
+            <p class="text-light">Securely upload and access employee documents.</p>
+            <a href="/documents" class="btn btn-primary btn-outline-light">Go to Documents</a>
           </div>
         </div>
         <div class="col-md-4 mb-4">
-          <div class="feature-box text-center">
-            <h4>Generate Reports</h4>
-            <p>Get insights with detailed reports and analytics.</p>
-            <a href="/reports" class="btn btn-primary">View Reports</a>
+          <div class="feature-box text-center  bg-dark">
+            <h4 class="text-light">Item </h4>
+            <p class="text-light">Get insights with items Assigned.</p>
+            <a href="/issued_items" class="btn btn-primary btn-outline-light">View Items</a>
           </div>
         </div>
       </div>
 
       <!-- Additional Section -->
-      <div class="row mt-5">
-        <div class="col-md-12">
-          <div class="bg-light p-4 rounded text-center">
-            <h4>About HrMitra</h4>
-            <p>
+      <div class="row mt-5" style="background-color: violet;">
+        <div class="col-md-12 ">
+          <div class="bg-light  p-4 rounded text-center">
+            <h4 class="text-success">About HrMitra</h4>
+            <p class="text_dark">
               HrMitra is a comprehensive Employee Management System designed to simplify HR processes. 
               It helps organizations manage employee records, documents, and roles efficiently while ensuring data security.
             </p>
-            <a href="/about" class="btn btn-secondary">Learn More</a>
+            <a href="/about" class="btn" style="background-color: orange; opacity: 0.8; color: white;">Learn More</a>
+
           </div>
         </div>
       </div>
