@@ -1,55 +1,90 @@
-<footer class="bg-dark text-white py-4 mt-auto w-100">
+<footer class="bg-dark text-white py-3 mt-auto w-100">
   <div class="container">
     <!-- Footer Links -->
-    <div class="row justify-content-between align-items-center">
-      <div class="col-md-6">
-        <h5>About HrMitra</h5>
-        <p class="text-light">
-          HrMitra is a comprehensive Employee Management System designed to simplify HR processes. 
-          It helps organizations manage employee records, documents, and roles efficiently while ensuring data security.
-        </p>
-      </div>
-      <div class="col-md-6 text-center text-md-end">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
         <p class="mb-2">
-          <%= link_to 'About Us', about_path, target: '_blank', class: 'text-danger' %> |
-          <%= link_to 'Contact Us', '/contact', class: 'text-danger' %> |
-          <%= link_to 'Privacy', '/privacy-policy', class: 'text-danger' %> |
-          <%= link_to 'T and C', '/terms-and-conditions', class: 'text-danger' %>
+          <%= link_to 'About Us', about_path, target: '_blank', class: 'text-light text-decoration-none mx-2 hover-link' %> |
+          <%= link_to 'Contact Us', '/contact', class: 'text-light text-decoration-none mx-2 hover-link' %> |
+          <%= link_to 'Privacy', '/privacy-policy', class: 'text-light text-decoration-none mx-2 hover-link' %> |
+          <%= link_to 'Terms and Conditions', '/terms-and-conditions', class: 'text-light text-decoration-none mx-2 hover-link' %>
         </p>
       </div>
     </div>
 
     <!-- Divider -->
-    <hr class="border-secondary my-3">
+    <hr class="border-light my-4">
 
     <!-- Contact Information -->
     <div class="row justify-content-between">
       <div class="col-md-6">
-        <h6>Contact Us</h6>
+        <h6 class="text-uppercase mb-3 font-weight-bold">Contact Us</h6>
         <p class="mb-1">
-          <i class="bi bi-envelope-fill text-danger"></i> Email: support@hrmitra.com
+          <i class="bi bi-envelope-fill text-danger"></i> support@hrmitra.com
         </p>
         <p class="mb-1">
-          <i class="bi bi-telephone-fill text-danger"></i> Phone: +1 (123) 456-7890
+          <i class="bi bi-telephone-fill text-danger"></i> +1 (123) 456-7890
         </p>
         <p>
-          <i class="bi bi-geo-alt-fill text-danger"></i> Address: 123, Corporate Ave, Tech City, USA
+          <i class="bi bi-geo-alt-fill text-danger"></i> 123, Corporate Ave, Tech City, USA
         </p>
       </div>
       <div class="col-md-6 text-center text-md-end">
-        <h6>Follow Us</h6>
-        <a href="#" class="text-danger me-2"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="text-danger me-2"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="text-danger me-2"><i class="bi bi-linkedin"></i></a>
-        <a href="#" class="text-danger"><i class="bi bi-instagram"></i></a>
+        <h6 class="text-uppercase mb-3 font-weight-bold">Follow Us</h6>
+        <a href="#" class="me-2 text-decoration-none social-icon" style="color: #1877F2;">
+          <i class="bi bi-facebook" style="font-size: 2rem;"></i>
+        </a>
+        <a href="#" class="me-2 text-decoration-none social-icon" style="color: #1DA1F2;">
+          <i class="bi bi-twitter" style="font-size: 2rem;"></i>
+        </a>
+        <a href="#" class="me-2 text-decoration-none social-icon" style="color: #0A66C2;">
+          <i class="bi bi-linkedin" style="font-size: 2rem;"></i>
+        </a>
+        <a href="#" class="me-2 text-decoration-none social-icon" style="color: #E1306C;">
+          <i class="bi bi-instagram" style="font-size: 2rem;"></i>
+        </a>
       </div>
     </div>
 
     <!-- Footer Bottom -->
-    <div class="row mt-3">
+    <div class="row mt-4">
       <div class="col-12 text-center">
         <p class="mb-0">&copy; 2024 HrMitra. All Rights Reserved.</p>
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+  .social-icon:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+
+  .hover-link:hover {
+    text-decoration: underline;
+  }
+
+  footer .container {
+    max-width: 1200px;
+  }
+
+  footer h6 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  footer p, footer a {
+    font-size: 0.9rem;
+  }
+
+  footer .row {
+    margin-bottom: 20px;
+  }
+
+  .border-light {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+</style>

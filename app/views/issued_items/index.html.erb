@@ -22,16 +22,17 @@
     <% @issued_items.each do |issued_item| %>
       <tr>
         <td><%= issued_item.item.name %></td>
-        <td><%= issued_item.employee.name %></td>
-        <td><%= issued_item.issued_at %></td>
-        <td><%= issued_item.returned_at %></td>
+        <td><%= issued_item.employee&.name || "N/A" %></td>
+        <td><%= issued_item.issued_at  || "N/A" %></td>
+        <td><%= issued_item.returned_at  || "N/A" %></td>
         <td>
-          <%= link_to "Edit", edit_issued_item_path(issued_item), class: 'btn btn-primary' %> 
-          <%= link_to "Delete", issued_item_path(issued_item), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <%= link_to "Assign", edit_issued_item_path(issued_item), class: 'btn btn-primary' %> 
+          <%= link_to "Deassign", issued_item_path(issued_item), class: 'btn btn-danger' %> 
+          
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Back', issued_items_path, class: 'btn btn-secondary' %>
+<%= link_to 'Back', issued_items_path, class: 'btn btn-success' %>

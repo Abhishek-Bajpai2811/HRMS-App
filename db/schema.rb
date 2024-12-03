@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_26_122743) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_03_062710) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,9 +42,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_26_122743) do
   create_table "documents", force: :cascade do |t|
     t.string "name"
     t.string "doc_type"
-    t.integer "employee_id", 
-    t.datetime "created_at", 
-    t.datetime "updated_at", 
+    t.integer "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_documents_on_employee_id"
   end
 
@@ -66,8 +66,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_26_122743) do
   end
 
   create_table "issued_items", force: :cascade do |t|
-    t.integer "item_id", 
-    t.integer "employee_id", 
+    t.integer "item_id", null: false
+    t.integer "employee_id"
     t.integer "issued_by"
     t.datetime "issued_at"
     t.datetime "returned_at"
@@ -84,8 +84,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_26_122743) do
     t.string "name"
     t.text "description"
     t.integer "quantity"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -115,6 +115,4 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_26_122743) do
   add_foreign_key "documents", "employees"
   add_foreign_key "issued_items", "employees"
   add_foreign_key "issued_items", "items"
-  add_foreign_key "issued_items, :users, column: :issued_by"
-
 end

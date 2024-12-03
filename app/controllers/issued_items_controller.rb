@@ -1,90 +1,3 @@
-# class IssuedItemsController < ApplicationController
-#   before_action :authenticate_user!
-#   before_action :set_issued_item, only: [:show, :edit, :update, :destroy]
-
-#   def index
-#     # Admin can see all issued items, HR can see total issued items, Employees can see their issued items
-#     if current_user.admin?
-#       @issued_items = IssuedItem.all
-#     elsif current_user.hr?
-#       @issued_items = IssuedItem.all # Modify this to show aggregated data if needed
-#     elsif current_user.employee?
-#       @issued_items = IssuedItem.where(employee_id: current_user.employee.id)
-#     else
-#       @issued_items = []
-#     end
-#   end
-
-#   def show
-#     # Everyone with access can view details of a specific issued item
-#   end
-
-#   def new
-#     # Only Admin can issue new items
-#     if current_user.admin?
-#       @issued_item = IssuedItem.new
-#     else
-#       redirect_to issued_items_path, alert: "You are not authorized to issue items."
-#     end
-#   end
-
-#   def create
-#     # Only Admin can issue items
-#     Rails.logger.debug "Issued Item Params: #{params.inspect}"
-#     @issued_item = IssuedItem.new(issued_item_params)
-
-#     if @issued_item.save
-#       redirect_to issued_items_path, notice: "Item issued successfully."
-#     else
-#       flash[:alert] = @issued_item.errors.full_messages.to_sentence
-#       render :new
-#     end
-#   end
-
-#   def edit
-#     # Only Admin can edit issued items
-#     unless current_user.admin?
-#       redirect_to issued_items_path, alert: "You are not authorized to edit issued items."
-#     end
-#   end
-
-#   def update
-#     # Only Admin can update issued items
-#     if current_user.admin?
-#       if @issued_item.update(issued_item_params)
-#         redirect_to issued_items_path, notice: "Issued item updated successfully."
-#       else
-#         flash[:alert] = @issued_item.errors.full_messages.to_sentence
-#         render :edit
-#       end
-#     else
-#       redirect_to issued_items_path, alert: "You are not authorized to update issued items."
-#     end
-#   end
-
-#   def destroy
-#     # Only Admin can delete issued items
-#     if current_user.admin?
-#       @issued_item.destroy
-#       redirect_to issued_items_path, notice: "Issued item deleted successfully."
-#     else
-#       redirect_to issued_items_path, alert: "You are not authorized to delete issued items."
-#     end
-#   end
-
-#   private
-
-#   def set_issued_item
-#     @issued_item = IssuedItem.find(params[:id])
-#   rescue ActiveRecord::RecordNotFound
-#     redirect_to issued_items_path, alert: "Issued item not found."
-#   end
-
-#   def issued_item_params
-#     params.require(:issued_item).permit(:item_id, :employee_id, :quantity, :issued_date, :return_date)
-#   end
-# end
-
 class IssuedItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_issued_item, only: [:destroy, :show, :edit, :update]
@@ -135,17 +48,75 @@ class IssuedItemsController < ApplicationController
     @employees = Employee.all
   end
 
-  def update
-    # If the return date is provided, update it
-    if @issued_item.update(issued_item_params)
-      if @issued_item.returned_at.present?
-        @issued_item.item.increment!(:quantity)  # Increment the item quantity once it's returned
-      end
-      redirect_to issued_items_path, notice: "Issued item updated successfully."
+#   def update
+#     # If the return date is provided, update it
+#     #DEASSIGN
+#     @issued_item = IssuedItem.find(params[:id])
+#     if params[:issued_item][:returned_at].present?
+#       @issued_item.update(issued_at: nil, returned_at: params[:issued_item][:returned_at])
+#       # @issued_item.update(returned_at: nil, assign_at: params[:issued_item][:issued_at])
+    
+#         if @issued_item.save
+#           @issued_item.item.increment!(:quantity) # Increment the item quantity once it's issued again
+          
+#         else
+#           render :edit, alert: "Failed to update issued item."
+#           return
+        
+#       end
+    
+#     end
+#     if @issued_item.update(issued_item_params)
+#       if @issued_item.issued_at.present?
+#         @issued_item.update(returned_at: nil, issued_at: params[:issued_item][:returned_at][:employee_id])
+
+#         # @issued_item.item.increment!(:quantity)  # Increment the item quantity once it's returned
+#         redirect_to issued_items_path, notice: "Issued item updated successfully."
+#       # end
+#       # redirect_to issued_items_path, notice: "Issued item updated successfully."
+#     else
+#       render :edit
+#     end
+#   end
+# end
+
+#NEW UPDATE METHOD GPT
+
+def update
+  @issued_item = IssuedItem.find(params[:id])
+
+  # **Deassign Logic**: If a return date is provided
+ 
+  if params[:issued_item][:returned_at].present?
+    if @issued_item.update(issued_at: nil, returned_at: params[:issued_item][:returned_at], employee_id: nil)
+    
+      @issued_item.item.increment!(:quantity) # Increment item quantity when returned
+      flash[:notice] = "Item deassigned successfully."
     else
-      render :edit
+      flash[:alert] = "Failed to deassign the item."
+      render :edit and return
+    end
+
+end
+
+  # **Reassign Logic**: If `issued_at` is provided and we want to reassign the item
+  if params[:issued_item][:issued_at].present?
+    if @issued_item.update(returned_at: nil, issued_at: params[:issued_item][:issued_at], employee_id: params[:issued_item][:employee_id])
+      @issued_item.item.decrement!(:quantity) # Decrement item quantity when reassigned
+      flash[:notice] = "Item reassigned successfully."
+    else
+      flash[:alert] = "Failed to reassign the item."
+      render :edit and return
     end
   end
+
+  # Redirect to issued items path after update
+  redirect_to issued_items_path
+end
+
+
+#DESTROY METHOD
+
  
   def destroy
     @issued_item = IssuedItem.find(params[:id])
