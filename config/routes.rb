@@ -13,12 +13,24 @@ Rails.application.routes.draw do
   get "items/edit"
   get "items/update"
   get "items/destroy"
+  # get '/auth/:provider/callback', to: 'users/sessions#omniauth'
+  # get '/auth/failure',  to: 'users/sessions#failure'
+  get '/auth/:provider/callback', to: 'users/omniauth_callbacks#google_oauth2'
+  get '/auth/failure', to: 'users/omniauth_callbacks#failure'
+  
+  
+  # get '/auth/:provider', to: 'sessions#passthru', as: :auth_passthru
+
+ 
+
+
   # Configure Devise routes with custom controllers
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     passwords: 'users/passwords',
-    confirmations: 'users/confirmations'
+    confirmations: 'users/confirmations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   # Admin Routes

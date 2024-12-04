@@ -58,3 +58,9 @@ end
 
 gem 'devise'
 gem 'pry'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'omniauth-rails_csrf_protection'
+
+

@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
     before_action :authenticate_user!, except: [:index]
+   
     def index
        @title_text='Hello Word!'
        @subtitle_text='I am Learning rails'

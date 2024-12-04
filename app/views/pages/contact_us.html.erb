@@ -1,6 +1,72 @@
-<div class="col-lg-10 mx-auto">
-<h1 class="text-center mt-5 mb-5">Contact Us Information</h1>
+<div class="container my-5">
+  <!-- Contact Us Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card shadow-lg border-primary mb-4" style="border-radius: 10px;">
+        <div class="card-body text-center">
+          <h1 class="text-primary mb-4" style="font-family: 'Arial', sans-serif;">Contact Us</h1>
+          <p class="lead text-secondary" style="font-size: 1.2rem;">We’d love to hear from you! Whether you have a question or feedback, feel free to reach out to us through the form below or the contact details provided.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%=render 'shared/links' %>   
+  <!-- Contact Information Section -->
+  <div class="row mb-10">
+    <div class="col-12">
+      <div class="card shadow-lg border-info mb-4" style="border-radius: 10px;">
+        <div class="card-body text-center">
+          <h2 class="text-info mb-4" style="border-bottom: 3px solid #28a745; padding-bottom: 10px;">Contact Information</h2>
+          <p class="text-dark"><strong>Address:</strong> 123 HR Street, Tech City, State, Country</p>
+          <p class="text-dark"><strong>Phone:</strong> +1 (123) 456-7890</p>
+          <p class="text-dark"><strong>Email:</strong> support@hrmitra.com</p>
+          <p class="text-dark"><strong>Business Hours:</strong> Mon - Fri: 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+    
 
+  
+
+  
+
+<!-- Optional: Script for form submission (client-side validation or handling) -->
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent form from submitting to the server for now
+
+    // Validate form inputs if needed
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    if (name && email && message) {
+      alert('Thank you for contacting us!');
+      // Here you can handle the form submission to your server (AJAX, etc.)
+    } else {
+      alert('Please fill out all fields.');
+    }
+  });
+</script>
+
+
+ 
+<!-- Optional: Script for form submission (client-side validation or handling) -->
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent form from submitting to the server for now
+
+    // Validate form inputs if needed
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    if (name && email && message) {
+      alert('Thank you for contacting us!');
+      // Here you can handle the form submission to your server (AJAX, etc.)
+    } else {
+      alert('Please fill out all fields.');
+    }
+  });
+</script>
 
